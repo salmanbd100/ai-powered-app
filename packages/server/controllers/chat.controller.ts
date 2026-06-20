@@ -17,7 +17,7 @@ export const chatController = {
    async sendMessage(req: Request, res: Response) {
       const parseResult = chatShema.safeParse(req.body);
       if (!parseResult.success) {
-         res.status(400).json(parseResult.error.format());
+         res.status(400).json(z.treeifyError(parseResult.error));
          return;
       }
       try {
