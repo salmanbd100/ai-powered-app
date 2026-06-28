@@ -1,13 +1,13 @@
-import { Bot, Check, Copy, Sparkles } from 'lucide-react';
+import { Check, Copy } from 'lucide-react';
 import { useEffect, useRef, useState } from 'react';
 import ReactMarkdown from 'react-markdown';
 import type { Message } from '@/types/chat';
 
 const SUGGESTIONS = [
-   'Explain a complex concept simply',
-   'Help me brainstorm ideas',
-   'Review my code for improvements',
-   'Write something creative',
+   "What's your experience with React & TypeScript?",
+   'Tell me about your international projects',
+   'What makes you a strong remote engineer?',
+   'Walk me through a challenging project',
 ];
 
 type Props = {
@@ -25,15 +25,21 @@ const ChatMessages = ({ messages, onSuggestion }: Props) => {
    if (messages.length === 0) {
       return (
          <div className="flex flex-col items-center justify-center min-h-[60vh] gap-6 text-center px-4">
-            <div className="flex items-center justify-center w-16 h-16 rounded-2xl bg-primary/10 text-primary">
-               <Sparkles className="size-7" />
+            <div className="relative">
+               <img
+                  src="/salman.png"
+                  alt="Salman Rahman"
+                  className="w-20 h-20 rounded-full object-cover object-top ring-4 ring-primary/20 shadow-lg"
+               />
+               <span className="absolute bottom-1 right-1 size-3.5 rounded-full bg-emerald-400 ring-2 ring-white" />
             </div>
             <div>
-               <h2 className="text-2xl font-semibold tracking-tight mb-1">
-                  How can I help you?
+               <h2 className="text-2xl font-bold tracking-tight mb-1 text-foreground">
+                  Hi, I'm Salman 👋
                </h2>
-               <p className="text-sm text-muted-foreground">
-                  Ask me anything, or pick a suggestion to get started.
+               <p className="text-sm text-muted-foreground max-w-sm">
+                  Senior Frontend Engineer with 9+ years of experience. Ask me
+                  anything about my work, skills, or availability.
                </p>
             </div>
             {onSuggestion && (
@@ -42,7 +48,7 @@ const ChatMessages = ({ messages, onSuggestion }: Props) => {
                      <button
                         key={s}
                         onClick={() => onSuggestion(s)}
-                        className="text-left text-sm px-4 py-3 rounded-xl border bg-card hover:bg-muted transition-colors duration-150 leading-snug"
+                        className="text-left text-sm px-4 py-3 rounded-xl border border-border bg-card hover:bg-accent hover:border-primary/30 hover:text-foreground transition-colors duration-150 leading-snug text-muted-foreground"
                      >
                         {s}
                      </button>
@@ -79,23 +85,26 @@ const MessageBubble = ({ message }: MessageBubbleProps) => {
 
    return (
       <div
-         className={`flex gap-2 ${isBot ? 'items-start' : 'flex-row-reverse items-end'}`}
+         className={`flex gap-2.5 ${isBot ? 'items-start' : 'flex-row-reverse items-end'}`}
       >
          {isBot && (
-            <div className="flex items-center justify-center w-7 h-7 rounded-full bg-primary/10 text-primary shrink-0 mt-0.5">
-               <Bot className="size-3.5" />
-            </div>
+            <img
+               src="/salman.png"
+               alt="Salman"
+               className="w-7 h-7 rounded-full object-cover object-top shrink-0 mt-0.5 ring-1 ring-primary/20"
+            />
          )}
          <div className="group relative max-w-[80%]">
             <div
                className={`px-4 py-2.5 rounded-2xl text-sm leading-relaxed ${
                   isBot
                      ? 'bg-muted text-foreground rounded-tl-sm'
-                     : 'bg-primary text-primary-foreground rounded-br-sm'
+                     : 'text-primary-foreground rounded-br-sm'
                }`}
+               style={!isBot ? { backgroundColor: '#2e7d96' } : undefined}
             >
                {isBot ? (
-                  <div className="prose prose-sm max-w-none dark:prose-invert [&_p:last-child]:mb-0">
+                  <div className="prose prose-sm max-w-none [&_p:last-child]:mb-0">
                      <ReactMarkdown>{message.content}</ReactMarkdown>
                   </div>
                ) : (

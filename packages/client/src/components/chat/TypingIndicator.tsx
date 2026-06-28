@@ -1,11 +1,11 @@
-import { Bot } from 'lucide-react';
-
 const TypingIndicator = () => {
    return (
-      <div className="flex items-start gap-2 mt-1 mb-4">
-         <div className="flex items-center justify-center w-7 h-7 rounded-full bg-primary/10 text-primary shrink-0 mt-0.5">
-            <Bot className="size-3.5" />
-         </div>
+      <div className="flex items-start gap-2.5 mt-1 mb-4">
+         <img
+            src="/salman.png"
+            alt="Salman"
+            className="w-7 h-7 rounded-full object-cover object-top shrink-0 mt-0.5 ring-1 ring-primary/20"
+         />
          <div className="flex items-center gap-1 px-4 py-3 bg-muted rounded-2xl rounded-tl-sm">
             <Dot delay={0} />
             <Dot delay={0.15} />

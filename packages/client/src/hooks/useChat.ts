@@ -38,5 +38,11 @@ export const useChat = () => {
 
    const dismissError = () => setError('');
 
-   return { messages, isLoading, error, sendMessage, dismissError };
+   const clearChat = () => {
+      setMessages([]);
+      setError('');
+      conversationId.current = crypto.randomUUID();
+   };
+
+   return { messages, isLoading, error, sendMessage, dismissError, clearChat };
 };

@@ -63,7 +63,7 @@ const ChatInput = ({ onSubmit, isLoading }: Props) => {
             autoFocus
             rows={1}
             className="w-full resize-none bg-transparent focus:outline-none text-sm placeholder:text-muted-foreground disabled:opacity-50 max-h-40 overflow-y-auto leading-relaxed"
-            placeholder="Ask anything..."
+            placeholder="Ask Salman anything..."
             maxLength={MAX_LENGTH}
          />
          <div className="flex items-center justify-between">
