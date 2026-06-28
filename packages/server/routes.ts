@@ -8,10 +8,6 @@ router.get('/', (req: Request, res: Response) => {
    res.send('Hello World');
 });
 
-router.get('/api/hello', (req: Request, res: Response) => {
-   res.json({ message: 'Hello Frontend' });
-});
-
 router.post('/api/chat', chatController.sendMessage);
 
 export default router;

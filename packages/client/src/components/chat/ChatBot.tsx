@@ -1,60 +1,36 @@
-import axios from 'axios';
-import { useRef, useState } from 'react';
-import ChatInput, { type ChatFormData } from './ChatInput';
-import type { Message } from './ChatMessages';
+import { X } from 'lucide-react';
+import { useChat } from '@/hooks/useChat';
+import ChatInput from './ChatInput';
 import ChatMessages from './ChatMessages';
 import TypingIndicator from './TypingIndicator';
-import popSound from '@/assets/sounds/pop.mp3';
-import notificationSound from '@/assets/sounds/notification.mp3';
-
-const popAudio = new Audio(popSound);
-popAudio.volume = 0.2;
-
-const notificationAudio = new Audio(notificationSound);
-notificationAudio.volume = 0.2;
-
-type ChatResponse = {
-   message: string;
-};
 
 const ChatBot = () => {
-   const [messages, setMessages] = useState<Message[]>([]);
-   const [isBotTyping, setIsBotTyping] = useState(false);
-   const [error, setError] = useState('');
-   const conversationId = useRef(crypto.randomUUID());
-
-   const onSubmit = async ({ prompt }: ChatFormData) => {
-      try {
-         setMessages((prev) => [...prev, { content: prompt, role: 'user' }]);
-         setIsBotTyping(true);
-         setError('');
-         popAudio.play();
-
-         const { data } = await axios.post<ChatResponse>('/api/chat', {
-            prompt,
-            conversationId: conversationId.current,
-         });
-         setMessages((prev) => [
-            ...prev,
-            { content: data.message, role: 'bot' },
-         ]);
-         notificationAudio.play();
-      } catch (error) {
-         console.error(error);
-         setError('Something went wrong, try again!');
-      } finally {
-         setIsBotTyping(false);
-      }
-   };
+   const { messages, isLoading, error, sendMessage, dismissError } = useChat();
 
    return (
-      <div className="flex flex-col h-full">
-         <div className="flex flex-col flex-1 gap-3 mb-10 overflow-y-auto">
-            <ChatMessages messages={messages} />
-            {isBotTyping && <TypingIndicator />}
-            {error && <p className="text-red-500">{error}</p>}
+      <div className="flex flex-col h-full pt-4">
+         <div className="flex-1 overflow-y-auto px-1 scroll-smooth">
+            <ChatMessages messages={messages} onSuggestion={sendMessage} />
+            {isLoading && <TypingIndicator />}
+            {error && (
+               <div className="flex items-center gap-2 mt-3 px-3 py-2 text-sm text-destructive bg-destructive/10 border border-destructive/20 rounded-lg">
+                  <span className="flex-1">{error}</span>
+                  <button
+                     onClick={dismissError}
+                     className="shrink-0 hover:opacity-70 transition-opacity"
+                     aria-label="Dismiss error"
+                  >
+                     <X className="size-3.5" />
+                  </button>
+               </div>
+            )}
          </div>
-         <ChatInput onSubmit={onSubmit} />
+         <div className="pt-3">
+            <ChatInput
+               onSubmit={({ prompt }) => sendMessage(prompt)}
+               isLoading={isLoading}
+            />
+         </div>
       </div>
    );
 };
