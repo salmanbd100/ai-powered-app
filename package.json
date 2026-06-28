@@ -5,7 +5,7 @@
   "private": true,
   "scripts": {
     "dev": "bun run index.ts",
-    "build": "cd packages/client && bun install && bun run build && cd ../.. && bun build packages/server/app.ts --outfile api/index.js --target node",
+    "build": "cd packages/client && bun install && bun run build && cd ../.. && bun build packages/server/app.ts --outfile api/lib/server.js --target node",
     "format": "prettier --write .",
     "prepare": "husky"
   },
