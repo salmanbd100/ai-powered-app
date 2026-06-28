@@ -5,6 +5,7 @@
   "private": true,
   "scripts": {
     "dev": "bun run index.ts",
+    "build": "cd packages/client && bun install && bun run build",
     "format": "prettier --write .",
     "prepare": "husky"
   },
