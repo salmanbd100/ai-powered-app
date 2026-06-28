@@ -26,7 +26,8 @@ export const chatController = {
             conversationId
          );
          res.json({ message });
-      } catch {
+      } catch (err) {
+         console.error('[chat] sendMessage error:', err);
          res.status(500).json({ error: 'Unable to process your request' });
       }
    },
