@@ -17,7 +17,7 @@ export const chatService = {
       conversationId: string
    ): Promise<ChatResponse> {
       const response = await client.responses.create({
-         model: 'gpt-4o-mini',
+         model: process.env.OPENAI_MODEL ?? 'gpt-4.1-mini',
          instructions: SALMAN_PERSONA,
          input: prompt,
          temperature: 0.6,
