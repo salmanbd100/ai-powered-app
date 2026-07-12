@@ -11,7 +11,7 @@ function App() {
          <header className="flex items-center gap-3 px-6 py-3 border-b shrink-0 bg-white shadow-sm">
             <div className="relative shrink-0">
                <img
-                  src="/salman.png"
+                  src="/salman.jpg"
                   alt="Salman Rahman"
                   className="w-10 h-10 rounded-full object-cover object-top ring-2 ring-primary/20"
                />

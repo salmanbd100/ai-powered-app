@@ -2,7 +2,7 @@ const TypingIndicator = () => {
    return (
       <div className="flex items-start gap-2.5 mt-1 mb-4">
          <img
-            src="/salman.png"
+            src="/salman.jpg"
             alt="Salman"
             className="w-7 h-7 rounded-full object-cover object-top shrink-0 mt-0.5 ring-1 ring-primary/20"
          />

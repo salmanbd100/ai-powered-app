@@ -27,7 +27,7 @@ const ChatMessages = ({ messages, onSuggestion }: Props) => {
          <div className="flex flex-col items-center justify-center min-h-[60vh] gap-6 text-center px-4">
             <div className="relative">
                <img
-                  src="/salman.png"
+                  src="/salman.jpg"
                   alt="Salman Rahman"
                   className="w-20 h-20 rounded-full object-cover object-top ring-4 ring-primary/20 shadow-lg"
                />
@@ -89,7 +89,7 @@ const MessageBubble = ({ message }: MessageBubbleProps) => {
       >
          {isBot && (
             <img
-               src="/salman.png"
+               src="/salman.jpg"
                alt="Salman"
                className="w-7 h-7 rounded-full object-cover object-top shrink-0 mt-0.5 ring-1 ring-primary/20"
             />
