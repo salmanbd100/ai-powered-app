@@ -1,5 +1,6 @@
 import OpenAI from 'openai';
 import { conversationRepository } from '../repositories/conversation.repository';
+import { SALMAN_PERSONA } from '../prompts/persona';
 
 const client = new OpenAI({
    apiKey: process.env.OPENAI_API_KEY,
@@ -17,8 +18,9 @@ export const chatService = {
    ): Promise<ChatResponse> {
       const response = await client.responses.create({
          model: 'gpt-4o-mini',
+         instructions: SALMAN_PERSONA,
          input: prompt,
-         temperature: 0.2,
+         temperature: 0.6,
          previous_response_id:
             conversationRepository.getLastRespondId(conversationId),
       });
