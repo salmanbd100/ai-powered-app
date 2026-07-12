@@ -1,6 +1,7 @@
 import { Check, Copy } from 'lucide-react';
 import { useEffect, useRef, useState } from 'react';
 import ReactMarkdown from 'react-markdown';
+import remarkGfm from 'remark-gfm';
 import type { Message } from '@/types/chat';
 
 const SUGGESTIONS = [
@@ -104,8 +105,22 @@ const MessageBubble = ({ message }: MessageBubbleProps) => {
                style={!isBot ? { backgroundColor: '#2e7d96' } : undefined}
             >
                {isBot ? (
-                  <div className="prose prose-sm max-w-none [&_p:last-child]:mb-0">
-                     <ReactMarkdown>{message.content}</ReactMarkdown>
+                  <div className="text-sm leading-relaxed space-y-2 [&_p]:my-0 [&_ul]:my-1 [&_ul]:list-disc [&_ul]:pl-5 [&_ol]:my-1 [&_ol]:list-decimal [&_ol]:pl-5 [&_li]:my-0.5 [&_strong]:font-semibold [&_em]:italic [&_code]:rounded [&_code]:bg-black/5 [&_code]:px-1 [&_code]:py-0.5 [&_code]:text-[0.85em]">
+                     <ReactMarkdown
+                        remarkPlugins={[remarkGfm]}
+                        components={{
+                           a: ({ ...props }) => (
+                              <a
+                                 {...props}
+                                 target="_blank"
+                                 rel="noopener noreferrer"
+                                 className="font-medium text-primary underline underline-offset-2 hover:opacity-80"
+                              />
+                           ),
+                        }}
+                     >
+                        {message.content}
+                     </ReactMarkdown>
                   </div>
                ) : (
                   <p className="whitespace-pre-wrap">{message.content}</p>
